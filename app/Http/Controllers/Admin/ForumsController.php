@@ -24,7 +24,8 @@ class ForumsController extends Controller
      */
     public function index()
     {
-        return view('admin.forums.index');
+        $forums = Forum::all();
+        return view('admin.forums.index', compact('forums'));
     }
 
     /**
@@ -53,6 +54,7 @@ class ForumsController extends Controller
         $data['user_id'] = Auth::user()->id;
 
         Forum::create($data);
+        flash('Success create new forums');
         return redirect()->route('admin.forums.index');
     }
 
@@ -75,7 +77,9 @@ class ForumsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $forum = Forum::findOrFail($id);
+
+        return view('admin.forums.edit', compact('forum'));
     }
 
     /**
@@ -87,7 +91,15 @@ class ForumsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+          'name' => 'required'
+        ]);
+
+        $forum = Forum::findOrFail($id);
+        $forum->update($request->all());
+
+        flash('Update success');
+        return redirect()->route('admin.forums.index');
     }
 
     /**
@@ -98,6 +110,10 @@ class ForumsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $forum = Forum::findOrFail($id);
+        $forum->delete();
+
+        flash("Success Destroy");
+        return redirect()->route('admin.forums.index');
     }
 }
