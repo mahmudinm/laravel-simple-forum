@@ -1,11 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class ForumController extends Controller
+class CategoriesController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['auth','admin']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +20,7 @@ class ForumController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.categories.index');
     }
 
     /**

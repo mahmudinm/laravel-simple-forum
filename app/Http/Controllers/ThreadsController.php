@@ -13,7 +13,7 @@ class ThreadsController extends Controller
      */
     public function index()
     {
-        //
+        return view('threads.index');
     }
 
     /**

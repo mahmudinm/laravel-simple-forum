@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9865fd6fd71397a9d865c7a4be2f07d2",
-    "content-hash": "35f93ae1cd13ec5d4778ee40f2ee9a06",
+    "hash": "53bf1ab94b7a7ba4eafe64b95391ea2c",
+    "content-hash": "bedab20f63e109c6d36e012a0c0b251a",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -472,6 +472,49 @@
                 "tokenizer"
             ],
             "time": "2015-12-05 17:17:57"
+        },
+        {
+            "name": "laracasts/flash",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laracasts/flash.git",
+                "reference": "11533f9f60e75b449c05c4d4abf068c73fe7e02b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laracasts/flash/zipball/11533f9f60e75b449c05c4d4abf068c73fe7e02b",
+                "reference": "11533f9f60e75b449c05c4d4abf068c73fe7e02b",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Laracasts\\Flash": "src/"
+                },
+                "files": [
+                    "src/Laracasts/Flash/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeffrey Way",
+                    "email": "jeffrey@laracasts.com"
+                }
+            ],
+            "description": "Easy flash notifications",
+            "time": "2016-07-12 13:53:03"
         },
         {
             "name": "laravel/framework",
@@ -3662,7 +3705,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "greggilbert/recaptcha": 20
+        "greggilbert/recaptcha": 20,
+        "laracasts/flash": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

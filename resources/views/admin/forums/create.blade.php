@@ -8,11 +8,12 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    You are logged in!
+                    {!! Form::open(['route' => 'admin.forums.store'])!!}
+                          @include('admin.forums._form')
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>
     </div>
 </div>
 @endsection
-

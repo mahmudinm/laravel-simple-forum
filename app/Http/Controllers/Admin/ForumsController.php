@@ -1,11 +1,22 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
+use App\Forum;
+use Auth;
 
 class ForumsController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['auth','admin']);
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +24,7 @@ class ForumsController extends Controller
      */
     public function index()
     {
-        return view('forums.index');
+        return view('admin.forums.index');
     }
 
     /**
@@ -23,7 +34,7 @@ class ForumsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.forums.create');
     }
 
     /**
@@ -34,7 +45,15 @@ class ForumsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+          'name' => 'required'
+        ]);
+
+        $data            = $request->only('name');
+        $data['user_id'] = Auth::user()->id;
+
+        Forum::create($data);
+        return redirect()->route('admin.forums.index');
     }
 
     /**

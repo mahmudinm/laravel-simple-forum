@@ -18,3 +18,16 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+Route::group([
+  'prefix' => 'admin', 
+  'namespace' => 'Admin',
+  'as' => 'admin.'
+], function(){
+  Route::resource('forums', 'ForumsController');
+  Route::resource('categories', 'CategoriesController');
+});
+
+Route::resource('forums', 'ForumsController');
+Route::resource('forums.categories', 'CategoriesController');
+Route::resource('threads', 'ThreadsController');
