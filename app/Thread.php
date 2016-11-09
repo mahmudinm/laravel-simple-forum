@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Thread extends Model
 {
+    use Sluggable;
+
     protected $fillable = ['title', 'body'];
 
     public function user()
@@ -22,5 +24,19 @@ class Thread extends Model
     {
         return $this->morphMany('App\Comment', 'commentable');
     }
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }    
 
 }
