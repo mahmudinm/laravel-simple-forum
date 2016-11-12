@@ -55,6 +55,8 @@ class ThreadsController extends Controller
 
     }
 
+/* resource nested di pisah supaya url show thread nya lebih bersih */
+
     /**
      * Display the specified resource.
      *
@@ -64,7 +66,8 @@ class ThreadsController extends Controller
     public function show($slug)
     {
         $thread = Thread::findBySlug($slug);
-        return view('threads.show', compact('thread'));
+        $comments = Thread::findBySlug($slug)->comments()->paginate(20);
+        return view('threads.show', compact('thread', 'comments'));
     }
 
     /**

@@ -13,22 +13,11 @@
                 <div class="panel-heading">Create new thread</div>
 
                 <div class="panel-body">
-                    {!! Form::model($thread, ['route' => ['threads.update', $thread->slug], 'method' => 'patch'])!!}
-                          <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-                              {!! Form::label('title', 'Title') !!}
-                              {!! Form::text('title', null, ['class' => 'form-control']) !!}
-                              <small class="text-danger">{{ $errors->first('title') }}</small>
-                          </div>  
-
-                          <div class="form-group{{ $errors->has('body') ? ' has-error' : '' }}">
-                              {!! Form::label('body', 'Body') !!}
-                              {!! Form::textarea('body', null, ['class' => 'form-control ckeditor']) !!}
-                              <small class="text-danger">{{ $errors->first('body') }}</small>
-                          </div>
-
-                          {!! Form::submit('Update thread', ['class'=>'btn btn-primary btn-block']) !!}
-        
-                    {!! Form::close() !!}
+                  {!! Form::model($comment, ['route' => ['threads.comments.update', $thread->slug, $comment->id], 'method' => 'patch'])!!}
+                        {{-- to redirect to current page --}}
+                        {!! Form::hidden('page', request('page')) !!}
+                        @include('comments._form', ['model' => $comment])
+                  {!! Form::close() !!}
                 </div>
             </div>
         </div>

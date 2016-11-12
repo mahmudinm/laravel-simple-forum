@@ -25,6 +25,7 @@
                               {!! Form::textarea('body', null, ['class' => 'form-control ckeditor']) !!}
                               <small class="text-danger">{{ $errors->first('body') }}</small>
                           </div>
+                          
 
                           {!! Form::submit('Update thread', ['class'=>'btn btn-primary btn-block']) !!}
         

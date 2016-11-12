@@ -10,7 +10,7 @@
         <div class="col-md-12">
           
             <div class="panel panel-default">
-                <div class="panel-heading">Create new thread</div>
+                <div class="panel-heading">Your comment here</div>
 
                 <div class="panel-body">
                   {!! Form::open(['route' => ['threads.comments.store', $threadSlug]])!!}

@@ -12,5 +12,13 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
+        $thread = App\Thread::find(2);
+        $comment = new App\Comment;
+
+        $comment->body = '<p>Comment it</p>';
+        $comment->user_id = 1;
+        $thread->comments()->save($comment);
+
+
     }
 }
