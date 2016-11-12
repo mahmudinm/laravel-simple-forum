@@ -7,12 +7,13 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Dashboard</div>
 
-                <div class="panel-body">
-                    You are logged in!
+                <div class="panel-body"> 
+                  {!! Form::model($category, ['route' => ['admin.categories.update', $category], 'method' => 'patch'])!!}
+                        @include('admin.categories._form', ['model' => $category])
+                  {!! Form::close() !!}
                 </div>
             </div>
         </div>
     </div>
 </div>
 @endsection
-

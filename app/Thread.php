@@ -3,12 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
+
 
 class Thread extends Model
 {
-    use Sluggable;
+    use Sluggable, SluggableScopeHelpers;
 
-    protected $fillable = ['title', 'body'];
+    protected $fillable = ['title', 'body', 'views', 'category_id', 'user_id'];
 
     public function user()
     {

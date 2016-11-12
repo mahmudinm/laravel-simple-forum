@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Thread;
+use Auth;
 
 class ThreadsController extends Controller
 {
@@ -21,9 +23,9 @@ class ThreadsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create($forumId, $categoryId)
+    { 
+        return view('threads.create', compact('forumId', 'categoryId'));
     }
 
     /**
@@ -32,9 +34,25 @@ class ThreadsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $forumId, $categoryId)
     {
-        //
+        $this->validate($request, [
+          'title' => 'required|max:50',
+          'body' => 'required|max:10000',
+          'g-recaptcha-response' => 'required'
+        ]);
+
+        $thread = new Thread;
+        $thread->title = $request->title;
+        $thread->body = $request->body;
+        $thread->user_id = Auth::user()->id;
+        $thread->category_id = $categoryId;
+        $thread->views = 1;
+        $thread->save();
+
+        return redirect()->route('threads.show', $thread->slug);
+
+
     }
 
     /**
@@ -43,9 +61,10 @@ class ThreadsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $thread = Thread::findBySlug($slug);
+        return view('threads.show', compact('thread'));
     }
 
     /**
@@ -54,9 +73,10 @@ class ThreadsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+        $thread = Thread::findBySlug($slug);
+        return view('threads.edit', compact('thread'));
     }
 
     /**
@@ -66,19 +86,17 @@ class ThreadsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $slug)
     {
-        //
+        $thread = Thread::findBySlug($slug);
+        $this->validate($request, [
+          'title' => 'required|max:50',
+          'body' => 'required|max:10000',
+        ]);
+
+        $thread->update($request->all());
+
+        return redirect()->route('threads.show', $thread->slug);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

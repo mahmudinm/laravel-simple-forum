@@ -11,13 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/', 'HomeController@index');
+Route::get('/create_thread', 'HomeController@createThread')->name('home.create_thread');
+Route::post('/create_thread', 'HomeController@storeThread')->name('home.store_thread');
 
 Route::group([
   'prefix' => 'admin', 
@@ -30,4 +29,12 @@ Route::group([
 
 Route::resource('forums', 'ForumsController');
 Route::resource('forums.categories', 'CategoriesController');
-Route::resource('threads', 'ThreadsController');
+Route::resource('forums.categories.threads', 'ThreadsController',[
+  'except' => 'show'
+]);
+
+Route::resource('threads', 'ThreadsController', [
+  'only' => ['show', 'edit', 'update']
+]);
+Route::resource('threads.comments', 'CommentsController');
+

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'user_id', 'forum_id'];
 
     public function user()
     {
@@ -15,13 +15,12 @@ class Category extends Model
 
     public function forum()
     {
-        return $this->belongsTo('App\Forum')
+        return $this->belongsTo('App\Forum');
     }
 
     public function threads()
     {
         return $this->hasMany('App\Thread', 'category_id');
     }
-
 
 }

@@ -5,10 +5,12 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+                <div class="panel-heading">Create new category</div>
 
                 <div class="panel-body">
-                    You are logged in!
+                    {!! Form::open(['route' => 'admin.categories.store'])!!}
+                          @include('admin.categories._form')
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>

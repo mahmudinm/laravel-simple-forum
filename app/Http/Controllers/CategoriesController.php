@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Category;
 
 class CategoriesController extends Controller
 {
@@ -23,7 +24,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        //
+      
     }
 
     /**
@@ -34,27 +35,28 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $forumId, $categoryId
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($forumId, $categoryId)
     {
-        //
+        $category = Category::findOrFail($categoryId);
+        return view('categories.show', compact('category', 'forumId', 'categoryId'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $forumId, $categoryId
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($forumId, $categoryId)
     {
         //
     }
@@ -63,10 +65,10 @@ class CategoriesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $forumId, $categoryId
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $forumId, $categoryId)
     {
         //
     }
@@ -74,10 +76,10 @@ class CategoriesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int  $forumId, $categoryId
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($forumId, $categoryId)
     {
         //
     }

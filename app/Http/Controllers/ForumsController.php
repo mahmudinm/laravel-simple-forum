@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Forum;
+
 class ForumsController extends Controller
 {
     /**
@@ -13,6 +15,7 @@ class ForumsController extends Controller
      */
     public function index()
     {
+        $forums = Forum::all();
         return view('forums.index');
     }
 
@@ -45,7 +48,8 @@ class ForumsController extends Controller
      */
     public function show($id)
     {
-        //
+        $forum = Forum::findOrFail($id);
+        return view('forums.show', compact('forum'));
     }
 
     /**
