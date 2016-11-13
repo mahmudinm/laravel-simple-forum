@@ -5,11 +5,11 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
-
+use willvincent\Rateable\Rateable;
 
 class Thread extends Model
 {
-    use Sluggable, SluggableScopeHelpers;
+    use Sluggable, SluggableScopeHelpers, Rateable;
 
     protected $fillable = ['title', 'body', 'views', 'category_id', 'user_id'];
 

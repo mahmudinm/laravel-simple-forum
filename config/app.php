@@ -172,6 +172,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Greggilbert\Recaptcha\RecaptchaServiceProvider::class,        
         Laracasts\Flash\FlashServiceProvider::class,
+        willvincent\Rateable\RateableServiceProvider::class,
         /*
          * Application Service Providers...
          */

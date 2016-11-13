@@ -36,5 +36,7 @@ Route::resource('forums.categories.threads', 'ThreadsController',[
 Route::resource('threads', 'ThreadsController', [
   'only' => ['show', 'edit', 'update']
 ]);
+Route::post('/threads/{slug}/postStar', 'ThreadsController@postStar')->name('threads.star');
+
 Route::resource('threads.comments', 'CommentsController');
 

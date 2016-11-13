@@ -5,9 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Thread;
 use Auth;
+use willvincent\Rateable\Rating;
 
 class ThreadsController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => 'show']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -100,6 +107,25 @@ class ThreadsController extends Controller
         $thread->update($request->all());
 
         return redirect()->route('threads.show', $thread->slug);
+    }
+
+
+    public function postStar(Request $request, $slug)
+    {
+        $thread = Thread::findBySlug($slug);
+        $validate =  $thread->ratings()->where('user_id', \Auth::id())->first();
+
+        if (count($validate)) {
+          return 'Memberi rating hanya bisa di lakukan sekali';      
+        } else {
+          $rating = new Rating;
+          $rating->rating = $request->rating;
+          $rating->user_id = \Auth::id();
+          $thread->ratings()->save($rating);
+
+          return 'Thanks for rating';
+        }
+
     }
 
 }
