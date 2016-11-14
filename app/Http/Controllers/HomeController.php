@@ -49,10 +49,8 @@ class HomeController extends Controller
         $data['user_id'] = Auth::user()->id;
         $data['views'] = 1;
 
-        // return $data;
-        Thread::create($data);
-        
-        return 'ok';
+        $thread = Thread::create($data);
+        return redirect()->route('threads.show', $thread->slug);
 
     }
 

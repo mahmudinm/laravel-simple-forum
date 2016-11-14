@@ -82,6 +82,5 @@ class CommentsController extends Controller
 
         flash("Success update comment");
         return redirect()->route('threads.show', [$thread->slug, 'page' => request('page')]);
-
     }
 }

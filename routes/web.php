@@ -40,3 +40,4 @@ Route::post('/threads/{slug}/postStar', 'ThreadsController@postStar')->name('thr
 
 Route::resource('threads.comments', 'CommentsController');
 
+Route::resource('profile', 'ProfileController');
