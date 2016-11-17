@@ -14,6 +14,7 @@
           <img src="{{ url('upload/'.$user->photo) }}" class="img img-rounded img-responsive" style="width:100%;background-color:#fff;">
           <h3>Name : {{ ucwords($user->name) }}</h3>
           <h4>Email : {{ $user->email }}</h4>
+          <a href="{{ route('profile.message.create', $user->id) }}" class="btn btn-primary btn-block">Send Message</a>
         </div>
 
         <div class="col-md-9">

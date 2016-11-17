@@ -13,9 +13,14 @@ return [
     /**
      * Define custom database table names.
      */
-    'messages_table' => null,
+    // 'messages_table' => null,
 
-    'participants_table' => null,
+    // 'participants_table' => null,
 
-    'threads_table' => null,
+    // 'threads_table' => null,
+    
+    'messages_table' => 'messenger_messages',
+    'participants_table' => 'messenger_participants',
+    'threads_table' => 'messenger_threads',
+
 ];

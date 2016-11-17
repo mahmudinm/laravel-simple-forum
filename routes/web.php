@@ -16,6 +16,7 @@ Route::get('/', 'HomeController@index');
 Route::get('/create_topic', 'HomeController@createTopic')->name('home.create_topic');
 Route::post('/create_topic', 'HomeController@storeTopic')->name('home.store_topic');
 
+
 Route::group([
   'prefix' => 'admin', 
   'namespace' => 'Admin',
@@ -48,4 +49,5 @@ Auth::routes();
 Route::get('/profile/password', 'ProfileController@editPassword')->name('profile.edit_password');
 Route::post('/profile/password', 'ProfileController@updatePassword')->name('profile.update_password');
 Route::resource('profile', 'ProfileController');
+Route::resource('profile.message', 'MessageController');
 

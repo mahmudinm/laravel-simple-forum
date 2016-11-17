@@ -43,10 +43,6 @@
                         @for ($i = 0; $i < $topic->averageRating ; $i++)
                           <i class="glyphicon glyphicon-star" style="color:#f6e729;"></i>
                         @endfor
-                      @else
-                        @for ($i = 0; $i < 5; $i++)
-                          <i class="glyphicon glyphicon-star-empty" style="color:#f6e729;"></i>
-                        @endfor
                       @endif
                     </div>
                     <p style="font-size:12px;margin-top:2px;" class="">

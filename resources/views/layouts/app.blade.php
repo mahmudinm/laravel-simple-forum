@@ -56,6 +56,12 @@
                             <li><a href="{{ url('/login') }}">Login</a></li>
                             <li><a href="{{ url('/register') }}">Register</a></li>
                         @else
+                            <li>
+                              <a href="{{ route('profile.message.index', [Auth::id()]) }}">
+                                <i class="fa fa-envelope-o"></i> 
+                                {{ (Auth::user()->newThreadsCount()) ? Auth::user()->newThreadsCount() : "" }}
+                              </a>
+                            </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ ucwords(Auth::user()->name) }} <span class="caret"></span>
