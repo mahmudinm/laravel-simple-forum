@@ -8,17 +8,12 @@
           
 
         <a href="{{ route('threads.comments.create', [$thread->slug]) }}" 
-           class="btn btn-default pull-left 
-           {{ count($comments->total() >= 50) ? 'disabled' : '' }}">Comment</a>
+           class="btn btn-default pull-left">Comment</a>
            
         <div class="form-group{{ $errors->has('rating') ? ' has-error' : '' }}">
             {!! Form::label('rating', 'Give Rating', ['class' => 'col-sm-3 control-label']) !!}
           <div class="col-sm-9">
-            {!! Form::hidden('rating', null, ['class' => 'rating', 'id' => 'rating'
-            ]) !!}  
-
-            {{-- 'data-icon-lib' => 'fa', 'data-active-icon' => 'fa-star', 'data-inactive-icon' => 'fa-star-o' --}}
-            {{-- data-icon-lib="fa" data-active-icon="fa-star" data-inactive-icon="fa-star-o" --}}
+            {!! Form::hidden('rating', null, ['class' => 'rating', 'id' => 'rating']) !!}  
           </div>
         </div>
 
@@ -31,7 +26,7 @@
 
         {{-- Post page --}}
 
-        @if (!request('page') == 1)
+        @if (!request('page') == 1 or request('page') == 1)
           <div class="panel panel-default change-panel">
             <div class="panel-heading">
               <img src="http://i.kaskus.id/e3.1/images/banner-kasads-new.png" alt="" style="width:90px;height:70px;" class="pull-left img-rounded">  

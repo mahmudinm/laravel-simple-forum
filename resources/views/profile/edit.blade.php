@@ -8,7 +8,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-default">
+              <div class="panel panel-default">
                 <div class="panel-heading">Update Profile</div>
 
                 <div class="panel-body">
@@ -45,7 +45,7 @@
                           {!! Form::submit('Update', ['class' => 'btn btn-info btn-block']) !!}
 
 
-                    {!! Form::close() !!}
+                {!! Form::close() !!}
                 </div>
             </div>
         </div>

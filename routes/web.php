@@ -12,8 +12,6 @@
 */
 
 
-Auth::routes();
-
 Route::get('/', 'HomeController@index');
 Route::get('/create_thread', 'HomeController@createThread')->name('home.create_thread');
 Route::post('/create_thread', 'HomeController@storeThread')->name('home.store_thread');
@@ -27,17 +25,27 @@ Route::group([
   Route::resource('categories', 'CategoriesController');
 });
 
-Route::resource('forums', 'ForumsController');
-Route::resource('forums.categories', 'CategoriesController');
-Route::resource('forums.categories.threads', 'ThreadsController',[
-  'except' => 'show'
+// 
+Route::resource('forums', 'ForumsController',[
+  'only' => 'show'
 ]);
-
+Route::resource('forums.categories', 'CategoriesController', [
+  'only' => 'show'
+]);
+Route::resource('forums.categories.threads', 'ThreadsController',[
+  'only' => ['create', 'store']
+]);
 Route::resource('threads', 'ThreadsController', [
   'only' => ['show', 'edit', 'update']
 ]);
+
 Route::post('/threads/{slug}/postStar', 'ThreadsController@postStar')->name('threads.star');
+Route::resource('threads.comments', 'CommentsController',[
+  'except' => ['index', 'show']
+]);
 
-Route::resource('threads.comments', 'CommentsController');
-
+Auth::routes();
+Route::get('/profile/password', 'ProfileController@editPassword')->name('profile.edit_password');
+Route::post('/profile/password', 'ProfileController@updatePassword')->name('profile.update_password');
 Route::resource('profile', 'ProfileController');
+

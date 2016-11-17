@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-12">
           <a href="{{ route('profile.edit', $user) }}" class="btn btn-default btn-link pull-right">Update profile</a> 
-          <a href="{{ route('home.create_thread') }}" class="btn btn-default btn-link pull-right">Change password</a> 
+          <a href="{{ route('profile.edit_password') }}" class="btn btn-default btn-link pull-right">Change password</a> 
           <br>
           <br>
         </div>
@@ -14,19 +14,50 @@
           <img src="{{ url('upload/'.$user->photo) }}" class="img img-rounded img-responsive" style="width:100%;background-color:#fff;">
           <h3>Name : {{ ucwords($user->name) }}</h3>
           <h4>Email : {{ $user->email }}</h4>
-          <h4>No.hp : 081231233123</h4>
-          <a href="#" class="btn btn-info btn-block">Send message</a>
         </div>
-        <div class="col-md-9">
-          
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
 
-                <div class="panel-body">
-                    Welcome
-                </div>
+        <div class="col-md-9">
+  
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <b>Recent Post</b><span class="pull-right glyphicon glyphicon-pushpin"></span>
             </div>
+
+            @if (count($threads) == null)
+                <ul class="list-group"> 
+                  <a href="#" class="list-group-item" style="padding:10px 1px">
+                    Have no post
+                  </a>
+                </ul>
+            @endif
+
+            @foreach($threads as $thread)
+                <ul class="list-group">
+                  <a href="{{ route('threads.show', $thread->slug) }}" class="list-group-item" style="padding:10px 1px">
+                    <div class="col-md-10 col-xs-9">
+                      {{ $thread->title }} <br>
+                      @if (count($thread->ratings))
+                        @for ($i = 0; $i < $thread->averageRating ; $i++)
+                          <i class="glyphicon glyphicon-star" style="color:#f6e729;"></i>
+                        @endfor
+                      @else
+                        @for ($i = 0; $i < 5; $i++)
+                          <i class="glyphicon glyphicon-star-empty" style="color:#f6e729;"></i>
+                        @endfor
+                      @endif
+                    </div>
+                    <p style="font-size:12px;margin-top:2px;" class="">
+                      <span class="fa fa-comments"></span> : {{ count($thread->comments) }} Replies <br>
+                      <span class="glyphicon glyphicon-eye-open"></span> : {{ $thread->views }} Views
+                    </p>
+                  </a>
+                </ul>
+            @endforeach
+          </div>
+          
+          <span class="pull-right">{!! $threads->links() !!}</span>
         </div>
+
     </div>
 </div>
 @endsection

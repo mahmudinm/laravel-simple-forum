@@ -73,6 +73,8 @@ class ThreadsController extends Controller
     public function show($slug)
     {
         $thread = Thread::findBySlug($slug);
+        $thread->views += 1;
+        $thread->save();
         $comments = Thread::findBySlug($slug)->comments()->paginate(20);
         return view('threads.show', compact('thread', 'comments'));
     }

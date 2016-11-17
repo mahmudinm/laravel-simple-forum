@@ -4,18 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Auth;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
@@ -25,8 +17,9 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
-        return view('profile.show', compact('user'));
+        $user = User::findOrFail($id);
+        $threads = $user->threads()->orderBy('created_at', 'DESC')->paginate(10);
+        return view('profile.show', compact('user', 'threads'));
     }
 
     /**
@@ -37,7 +30,7 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         return view('profile.edit', compact('user'));
     }
 
@@ -53,7 +46,7 @@ class ProfileController extends Controller
         $user = User::findOrFail($id);
         $this->validate($request, [
           'name' => 'required',
-          'photo' => 'mimes:jpg,png,jpeg'
+          'photo' => 'mimes:jpg,png,jpeg|max:10240'
         ]);
 
         $data = $request->only('name');
@@ -73,14 +66,31 @@ class ProfileController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function editPassword()
     {
-        //
+
+        return view('profile.password');
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $this->validate($request, [
+            'password' => 'required',
+            'new_password' => 'required|confirmed|min:6'
+        ]);
+
+        $guard = Auth::guard();
+
+        if (!$guard->validate($request->only('password'))) {
+            flash('Your credentials not correct', 'danger');
+            return back();
+        }
+
+        $user = $guard->user();
+        $user->password = bcrypt($request->input('new_password'));
+        $user->save();
+
+        flash('Password has been updated');
+        return redirect()->route('profile.show', $user->id);
     }
 }

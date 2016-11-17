@@ -20,7 +20,8 @@ class HomeController extends Controller
     {
         $forums = Forum::all();
         $categories = Category::all();
-        return view('home.index', compact('forums'));
+        $threads = Thread::orderBy('created_at', 'DESC')->limit(10)->get();
+        return view('home.index', compact('forums', 'threads'));
     }
 
     public function createThread()
@@ -32,7 +33,7 @@ class HomeController extends Controller
         foreach ($categories as $category) {
           $data[$category->forum->name][$category->id] = $category->name;
         }
-
+        
         return view('home.create_thread', compact('data', 'eat_options'));
     }
 
