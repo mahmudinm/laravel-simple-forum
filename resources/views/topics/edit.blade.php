@@ -10,10 +10,10 @@
         <div class="col-md-12">
           
             <div class="panel panel-default">
-                <div class="panel-heading">Create new thread</div>
+                <div class="panel-heading">Create new topic</div>
 
                 <div class="panel-body">
-                    {!! Form::open(['route' => ['forums.categories.threads.store', $forumId, $categoryId]])!!}
+                    {!! Form::model($topic, ['route' => ['threads.update', $topic->slug], 'method' => 'patch'])!!}
                           <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                               {!! Form::label('title', 'Title') !!}
                               {!! Form::text('title', null, ['class' => 'form-control']) !!}
@@ -25,17 +25,9 @@
                               {!! Form::textarea('body', null, ['class' => 'form-control ckeditor']) !!}
                               <small class="text-danger">{{ $errors->first('body') }}</small>
                           </div>
+                          
 
-                          <div class="form-group">
-                            {!! Recaptcha::render() !!}
-                            @if ($errors->has('g-recaptcha-response'))
-                                <span class="help-block">
-                                    <small class="text-danger">{{ $errors->first('g-recaptcha-response') }}</small>
-                                </span>
-                            @endif
-                          </div> 
-
-                          {!! Form::submit('Create new thread', ['class'=>'btn btn-primary btn-block']) !!}
+                          {!! Form::submit('Update topic', ['class'=>'btn btn-primary btn-block']) !!}
         
                     {!! Form::close() !!}
                 </div>

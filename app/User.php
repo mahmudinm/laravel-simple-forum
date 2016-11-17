@@ -33,9 +33,9 @@ class User extends Authenticatable
         return $this->admin;
     }
 
-    public function threads()
+    public function topics()
     {
-        return $this->hasMany('App\Thread', 'user_id');
+        return $this->hasMany('App\Topic', 'user_id');
     }
 
 }

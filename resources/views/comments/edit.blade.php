@@ -10,10 +10,10 @@
         <div class="col-md-12">
           
             <div class="panel panel-default">
-                <div class="panel-heading">Create new thread</div>
+                <div class="panel-heading">Create new topic</div>
 
                 <div class="panel-body">
-                  {!! Form::model($comment, ['route' => ['threads.comments.update', $thread->slug, $comment->id], 'method' => 'patch'])!!}
+                  {!! Form::model($comment, ['route' => ['topics.comments.update', $topic->slug, $comment->id], 'method' => 'patch'])!!}
                         {{-- to redirect to current page --}}
                         {!! Form::hidden('page', request('page')) !!}
                         @include('comments._form', ['model' => $comment])

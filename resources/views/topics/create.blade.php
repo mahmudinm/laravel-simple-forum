@@ -10,21 +10,15 @@
         <div class="col-md-12">
           
             <div class="panel panel-default">
-                <div class="panel-heading">Create new thread</div>
+                <div class="panel-heading">Create new topic</div>
 
                 <div class="panel-body">
-                    {!! Form::open(['route' => 'home.store_thread'])!!}
-                          <div class="form-group{{ $errors->has('category_id') ? ' has-error' : '' }}">
-                              {!! Form::label('category_id', 'Categories') !!}
-                              {!! Form::select('category_id', $data, null, ['id' => 'category_id', 'class' => 'form-control', 'required' => 'required']) !!}
-                              <small class="text-danger">{{ $errors->first('category_id') }}</small>
-                          </div>
-
+                    {!! Form::open(['route' => ['forums.categories.topics.store', $forumId, $categoryId]])!!}
                           <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                               {!! Form::label('title', 'Title') !!}
                               {!! Form::text('title', null, ['class' => 'form-control']) !!}
                               <small class="text-danger">{{ $errors->first('title') }}</small>
-                          </div>
+                          </div>  
 
                           <div class="form-group{{ $errors->has('body') ? ' has-error' : '' }}">
                               {!! Form::label('body', 'Body') !!}
@@ -41,7 +35,7 @@
                             @endif
                           </div> 
 
-                          {!! Form::submit('Create new thread', ['class'=>'btn btn-primary btn-block']) !!}
+                          {!! Form::submit('Create new topic', ['class'=>'btn btn-primary btn-block']) !!}
         
                     {!! Form::close() !!}
                 </div>
@@ -52,7 +46,7 @@
 @endsection
 
 @section('script')
-  <script src="js/ckeditor/ckeditor.js"></script>
-  <script src="js/ckeditor/config.js"></script>
+  <script src="{{ url('js/ckeditor/ckeditor.js') }}"></script>
+  <script src="{{ url('js/ckeditor/config.js') }}"></script>
   
 @endsection

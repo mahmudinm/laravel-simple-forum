@@ -18,9 +18,9 @@ class Category extends Model
         return $this->belongsTo('App\Forum');
     }
 
-    public function threads()
+    public function topics()
     {
-        return $this->hasMany('App\Thread', 'category_id');
+        return $this->hasMany('App\Topic', 'category_id');
     }
 
 }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Forum;
 use App\Category;
-use App\Thread;
+use App\Topic;
 use Auth;
 
 class HomeController extends Controller
@@ -20,11 +20,11 @@ class HomeController extends Controller
     {
         $forums = Forum::all();
         $categories = Category::all();
-        $threads = Thread::orderBy('created_at', 'DESC')->limit(10)->get();
-        return view('home.index', compact('forums', 'threads'));
+        $topics = Topic::orderBy('created_at', 'DESC')->limit(10)->get();
+        return view('home.index', compact('forums', 'topics'));
     }
 
-    public function createThread()
+    public function createTopic()
     {
 
         // data for select optgroup
@@ -34,10 +34,10 @@ class HomeController extends Controller
           $data[$category->forum->name][$category->id] = $category->name;
         }
         
-        return view('home.create_thread', compact('data', 'eat_options'));
+        return view('home.create_topic', compact('data'));
     }
 
-    public function storeThread(Request $request)
+    public function storeTopic(Request $request)
     {
         $this->validate($request, [
           'category_id' => 'required',   
@@ -50,8 +50,8 @@ class HomeController extends Controller
         $data['user_id'] = Auth::user()->id;
         $data['views'] = 1;
 
-        $thread = Thread::create($data);
-        return redirect()->route('threads.show', $thread->slug);
+        $topic = Topic::create($data);
+        return redirect()->route('topics.show', $topic->slug);
 
     }
 

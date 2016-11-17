@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Thread;
+use App\Topic;
 use App\Comment;
 use Auth;
 
@@ -16,9 +16,9 @@ class CommentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($threadSlug)
+    public function create($topicSlug)
     {
-        return view('comments.create', compact('threadSlug'));
+        return view('comments.create', compact('topicSlug'));
     }
 
     /**
@@ -27,7 +27,7 @@ class CommentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $threadSlug)
+    public function store(Request $request, $topicSlug)
     {
         $this->validate($request, [
           'body' => 'required|max:10000',
@@ -37,14 +37,14 @@ class CommentsController extends Controller
         $comment = new Comment;
         $comment->body = $request->body;
         $comment->user_id = Auth::user()->id;
-        $thread = Thread::findBySlug($threadSlug);
+        $topic = Topic::findBySlug($topicSlug);
 
-        $thread->comments()->save($comment);
+        $topic->comments()->save($comment);
         // redirect to last page
-        $lastPage = Thread::findBySlug($threadSlug)->comments()->paginate(15)->lastPage();
+        $lastPage = Topic::findBySlug($topicSlug)->comments()->paginate(15)->lastPage();
 
         flash("Success create new comment");
-        return redirect()->route('threads.show', [$thread->slug, 'page' => (int)$lastPage]);
+        return redirect()->route('topics.show', [$topic->slug, 'page' => (int)$lastPage]);
         
     }
 
@@ -55,12 +55,12 @@ class CommentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($threadSLug, $id)
+    public function edit($topicSLug, $id)
     {
         // return request('page');
-        $thread  = Thread::findBySlug($threadSLug);
+        $topic  = Topic::findBySlug($topicSLug);
         $comment = Comment::find($id);
-        return view('comments.edit', compact('thread', 'comment'));
+        return view('comments.edit', compact('topic', 'comment'));
     }
 
     /**
@@ -70,17 +70,17 @@ class CommentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $threadSlug, $id)
+    public function update(Request $request, $topicSlug, $id)
     {
         $this->validate($request, [
           'body' => 'required'
         ]);
 
-        $thread  = Thread::findBySlug($threadSlug);
+        $topic  = Topic::findBySlug($topicSlug);
         $comment = Comment::find($id);
         $comment->update($request->all());
 
         flash("Success update comment");
-        return redirect()->route('threads.show', [$thread->slug, 'page' => request('page')]);
+        return redirect()->route('topics.show', [$topic->slug, 'page' => request('page')]);
     }
 }

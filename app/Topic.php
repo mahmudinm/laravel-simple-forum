@@ -7,7 +7,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use willvincent\Rateable\Rateable;
 
-class Thread extends Model
+class Topic extends Model
 {
     use Sluggable, SluggableScopeHelpers, Rateable;
 

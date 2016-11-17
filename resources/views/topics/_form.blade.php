@@ -19,5 +19,5 @@
   @endif
 </div> 
 
-{!! Form::submit(isset($model) ? 'Update thread' : 'Create new thread', ['class'=>'btn btn-primary btn-block']) !!}
-{!! Form::submit('Create new thread', ['class'=>'btn btn-primary btn-block']) !!}
+{!! Form::submit(isset($model) ? 'Update topic' : 'Create new topic', ['class'=>'btn btn-primary btn-block']) !!}
+{!! Form::submit('Create new topic', ['class'=>'btn btn-primary btn-block']) !!}

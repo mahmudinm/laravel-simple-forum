@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-          <a href="{{ route('home.create_thread') }}" class="btn btn-default pull-right">Create new thread</a>
+          <a href="{{ route('home.create_topic') }}" class="btn btn-default pull-right">Create new topic</a>
           <br>
           <br>
         </div>
@@ -28,7 +28,7 @@
               <b>Recent Post</b><span class="pull-right glyphicon glyphicon-pushpin"></span>
             </div>
 
-            @if (count($threads) == null)
+            @if (count($topics) == null)
                 <ul class="list-group"> 
                   <a href="#" class="list-group-item" style="padding:10px 1px">
                     Have no post
@@ -36,13 +36,13 @@
                 </ul>
             @endif
 
-            @foreach($threads as $thread)
+            @foreach($topics as $topic)
                 <ul class="list-group">
-                  <a href="{{ route('threads.show', $thread->slug) }}" class="list-group-item" style="padding:10px 1px">
+                  <a href="{{ route('topics.show', $topic->slug) }}" class="list-group-item" style="padding:10px 1px">
                     <div class="col-md-10 col-xs-9">
-                      {{ $thread->title }} <br>
-                      @if (count($thread->ratings))
-                        @for ($i = 0; $i < $thread->averageRating ; $i++)
+                      {{ $topic->title }} <br>
+                      @if (count($topic->ratings))
+                        @for ($i = 0; $i < $topic->averageRating ; $i++)
                           <i class="glyphicon glyphicon-star" style="color:#f6e729;"></i>
                         @endfor
                       @else
@@ -52,8 +52,8 @@
                       @endif
                     </div>
                     <p style="font-size:12px;margin-top:2px;" class="">
-                      <span class="fa fa-comments"></span> : {{ count($thread->comments) }} Replies <br>
-                      <span class="glyphicon glyphicon-eye-open"></span> : {{ $thread->views }} Views
+                      <span class="fa fa-comments"></span> : {{ count($topic->comments) }} Replies <br>
+                      <span class="glyphicon glyphicon-eye-open"></span> : {{ $topic->views }} Views
                     </p>
                   </a>
                 </ul>

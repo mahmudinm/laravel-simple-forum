@@ -19,9 +19,9 @@ class Forum extends Model
         return $this->hasMany('App\Category', 'forum_id');
     }
 
-    public function threads()
+    public function topics()
     {
-        return $this->hasManyThrough('App\Thread', 'App\Category');
+        return $this->hasManyThrough('App\Topic', 'App\Category');
     }
 
 

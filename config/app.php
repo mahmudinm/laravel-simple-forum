@@ -173,6 +173,7 @@ return [
         Greggilbert\Recaptcha\RecaptchaServiceProvider::class,        
         Laracasts\Flash\FlashServiceProvider::class,
         willvincent\Rateable\RateableServiceProvider::class,
+        Cmgmyr\Messenger\MessengerServiceProvider::class,
         /*
          * Application Service Providers...
          */

@@ -13,8 +13,8 @@
 
 
 Route::get('/', 'HomeController@index');
-Route::get('/create_thread', 'HomeController@createThread')->name('home.create_thread');
-Route::post('/create_thread', 'HomeController@storeThread')->name('home.store_thread');
+Route::get('/create_topic', 'HomeController@createTopic')->name('home.create_topic');
+Route::post('/create_topic', 'HomeController@storeTopic')->name('home.store_topic');
 
 Route::group([
   'prefix' => 'admin', 
@@ -32,15 +32,15 @@ Route::resource('forums', 'ForumsController',[
 Route::resource('forums.categories', 'CategoriesController', [
   'only' => 'show'
 ]);
-Route::resource('forums.categories.threads', 'ThreadsController',[
+Route::resource('forums.categories.topics', 'TopicsController',[
   'only' => ['create', 'store']
 ]);
-Route::resource('threads', 'ThreadsController', [
+Route::resource('topics', 'TopicsController', [
   'only' => ['show', 'edit', 'update']
 ]);
 
-Route::post('/threads/{slug}/postStar', 'ThreadsController@postStar')->name('threads.star');
-Route::resource('threads.comments', 'CommentsController',[
+Route::post('/topics/{slug}/postStar', 'TopicsController@postStar')->name('topics.star');
+Route::resource('topics.comments', 'CommentsController',[
   'except' => ['index', 'show']
 ]);
 

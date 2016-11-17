@@ -18,8 +18,8 @@ class ProfileController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
-        $threads = $user->threads()->orderBy('created_at', 'DESC')->paginate(10);
-        return view('profile.show', compact('user', 'threads'));
+        $topics = $user->topics()->orderBy('created_at', 'DESC')->paginate(10);
+        return view('profile.show', compact('user', 'topics'));
     }
 
     /**

@@ -13,7 +13,7 @@
                 <div class="panel-heading">Your comment here</div>
 
                 <div class="panel-body">
-                  {!! Form::open(['route' => ['threads.comments.store', $threadSlug]])!!}
+                  {!! Form::open(['route' => ['topics.comments.store', $topicSlug]])!!}
                         @include('comments._form')
                   {!! Form::close() !!}
                 </div>

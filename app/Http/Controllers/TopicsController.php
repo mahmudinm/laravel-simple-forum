@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Thread;
+use App\Topic;
 use Auth;
 use willvincent\Rateable\Rating;
 
-class ThreadsController extends Controller
+class TopicsController extends Controller
 {
 
     public function __construct()
@@ -22,7 +22,7 @@ class ThreadsController extends Controller
      */
     public function index()
     {
-        return view('threads.index');
+        return view('topics.index');
     }
 
     /**
@@ -32,7 +32,7 @@ class ThreadsController extends Controller
      */
     public function create($forumId, $categoryId)
     { 
-        return view('threads.create', compact('forumId', 'categoryId'));
+        return view('topics.create', compact('forumId', 'categoryId'));
     }
 
     /**
@@ -49,20 +49,20 @@ class ThreadsController extends Controller
           'g-recaptcha-response' => 'required'
         ]);
 
-        $thread = new Thread;
-        $thread->title = $request->title;
-        $thread->body = $request->body;
-        $thread->user_id = Auth::user()->id;
-        $thread->category_id = $categoryId;
-        $thread->views = 1;
-        $thread->save();
+        $topic = new Topic;
+        $topic->title = $request->title;
+        $topic->body = $request->body;
+        $topic->user_id = Auth::user()->id;
+        $topic->category_id = $categoryId;
+        $topic->views = 1;
+        $topic->save();
 
-        return redirect()->route('threads.show', $thread->slug);
+        return redirect()->route('topics.show', $topic->slug);
 
 
     }
 
-/* resource nested di pisah supaya url show thread nya lebih bersih */
+/* resource nested di pisah supaya url show topic nya lebih bersih */
 
     /**
      * Display the specified resource.
@@ -72,11 +72,11 @@ class ThreadsController extends Controller
      */
     public function show($slug)
     {
-        $thread = Thread::findBySlug($slug);
-        $thread->views += 1;
-        $thread->save();
-        $comments = Thread::findBySlug($slug)->comments()->paginate(20);
-        return view('threads.show', compact('thread', 'comments'));
+        $topic = Topic::findBySlug($slug);
+        $topic->views += 1;
+        $topic->save();
+        $comments = Topic::findBySlug($slug)->comments()->paginate(20);
+        return view('topics.show', compact('topic', 'comments'));
     }
 
     /**
@@ -87,8 +87,8 @@ class ThreadsController extends Controller
      */
     public function edit($slug)
     {
-        $thread = Thread::findBySlug($slug);
-        return view('threads.edit', compact('thread'));
+        $topic = Topic::findBySlug($slug);
+        return view('topics.edit', compact('topic'));
     }
 
     /**
@@ -100,22 +100,22 @@ class ThreadsController extends Controller
      */
     public function update(Request $request, $slug)
     {
-        $thread = Thread::findBySlug($slug);
+        $topic = Topic::findBySlug($slug);
         $this->validate($request, [
           'title' => 'required|max:50',
           'body' => 'required|max:10000',
         ]);
 
-        $thread->update($request->all());
+        $topic->update($request->all());
 
-        return redirect()->route('threads.show', $thread->slug);
+        return redirect()->route('topics.show', $topic->slug);
     }
 
 
     public function postStar(Request $request, $slug)
     {
-        $thread = Thread::findBySlug($slug);
-        $validate =  $thread->ratings()->where('user_id', \Auth::id())->first();
+        $topic = Topic::findBySlug($slug);
+        $validate =  $topic->ratings()->where('user_id', \Auth::id())->first();
 
         if (count($validate)) {
           return 'Memberi rating hanya bisa di lakukan sekali';      
@@ -123,7 +123,7 @@ class ThreadsController extends Controller
           $rating = new Rating;
           $rating->rating = $request->rating;
           $rating->user_id = \Auth::id();
-          $thread->ratings()->save($rating);
+          $topic->ratings()->save($rating);
 
           return 'Thanks for rating';
         }

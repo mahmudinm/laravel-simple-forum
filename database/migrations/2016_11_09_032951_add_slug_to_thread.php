@@ -13,7 +13,7 @@ class AddSlugToThread extends Migration
      */
     public function up()
     {
-        Schema::table('threads', function (Blueprint $table) {
+        Schema::table('topics', function (Blueprint $table) {
             $table->string('slug')->nullable();
         });
     }

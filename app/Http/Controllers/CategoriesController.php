@@ -16,8 +16,8 @@ class CategoriesController extends Controller
     public function show($forumId, $categoryId)
     {
         $category = Category::findOrFail($categoryId);
-        $threads = $category->threads()->orderBy('created_at', 'DESC')->paginate(10);        
-        return view('categories.show', compact('category', 'threads', 'forumId', 'categoryId'));
+        $topics = $category->topics()->orderBy('created_at', 'DESC')->paginate(10);        
+        return view('categories.show', compact('category', 'topics', 'forumId', 'categoryId'));
     }
 
 }
