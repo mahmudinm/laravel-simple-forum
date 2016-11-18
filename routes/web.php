@@ -17,12 +17,15 @@ Route::get('/create_topic', 'HomeController@createTopic')->name('home.create_top
 Route::post('/create_topic', 'HomeController@storeTopic')->name('home.store_topic');
 
 
+Route::get('/admin', 'Admin\DashboardController@index')->name('admin.dashboard'); 
 Route::group([
   'prefix' => 'admin', 
   'namespace' => 'Admin',
   'as' => 'admin.'
 ], function(){
   Route::resource('forums', 'ForumsController');
+
+  Route::get('categories/pdf', 'CategoriesController@pdf')->name('categories.pdf');
   Route::resource('categories', 'CategoriesController');
 });
 

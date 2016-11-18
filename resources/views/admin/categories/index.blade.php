@@ -10,7 +10,10 @@
 
         <div class="col-md-10">
             <div class="panel panel-default">
-                <div class="panel-heading">Categories <a href="{{ route('admin.categories.create') }}" class="btn btn-default btn-xs pull-right">Create new Category</a></div>
+                <div class="panel-heading">Categories 
+                  <a href="{{ route('admin.categories.create') }}" class="btn btn-default btn-xs pull-right">Create new Category</a> 
+                  <a href="{{ route('admin.categories.pdf') }}" class="btn btn-default btn-xs pull-right">Export To Pdf</a>
+                </div>
 
                 <div class="panel-body">
                   <table class="table table-hover">

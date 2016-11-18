@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Forum;
 use App\Category;
 use Auth;
+use PDF;
 
 class CategoriesController extends Controller
 {
@@ -63,17 +64,6 @@ class CategoriesController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -121,5 +111,12 @@ class CategoriesController extends Controller
 
         flash("Success Destroy");
         return redirect()->route('admin.categories.index');
+    }
+
+    public function pdf()
+    {
+        $categories = Category::all();
+        $pdf = PDF::loadView('admin.pdf.categories', ['categories' => $categories]);
+        return $pdf->stream();
     }
 }
