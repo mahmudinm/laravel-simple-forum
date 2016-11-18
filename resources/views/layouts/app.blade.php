@@ -57,7 +57,7 @@
                             <li><a href="{{ url('/register') }}">Register</a></li>
                         @else
                             <li>
-                              <a href="{{ route('profile.message.index', [Auth::id()]) }}">
+                              <a href="{{ route('profile.message.index')}}">
                                 <i class="fa fa-envelope-o"></i> 
                                 {{ (Auth::user()->newThreadsCount()) ? Auth::user()->newThreadsCount() : "" }}
                               </a>

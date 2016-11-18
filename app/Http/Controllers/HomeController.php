@@ -11,6 +11,11 @@ use Auth;
 class HomeController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => 'index']);
+    }
+
     /**
      * Show the application dashboard.
      *

@@ -9,6 +9,11 @@ use Auth;
 class ProfileController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => 'show']);
+    }
+
     /**
      * Display the specified resource.
      *
@@ -28,9 +33,9 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
-        $user = User::findOrFail($id);
+        $user = Auth::user();
         return view('profile.edit', compact('user'));
     }
 
@@ -59,7 +64,6 @@ class ProfileController extends Controller
           $data['photo'] = $fileName;
         }
 
-        // return $data;
         $user->update($data);
         flash("Update profile success");
         return redirect()->route('profile.show', $user->id);

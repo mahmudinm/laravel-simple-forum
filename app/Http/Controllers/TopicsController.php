@@ -15,15 +15,6 @@ class TopicsController extends Controller
         $this->middleware('auth', ['except' => 'show']);
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('topics.index');
-    }
 
     /**
      * Show the form for creating a new resource.

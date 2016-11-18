@@ -4,8 +4,12 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-          <a href="{{ route('profile.edit', $user) }}" class="btn btn-default btn-link pull-right">Update profile</a> 
-          <a href="{{ route('profile.edit_password') }}" class="btn btn-default btn-link pull-right">Change password</a> 
+        @if (Auth::check())
+          @if (Auth::id() == $user->id)
+            <a href="{{ route('profile.edit') }}" class="btn btn-default btn-link pull-right">Update profile</a> 
+            <a href="{{ route('profile.edit_password') }}" class="btn btn-default btn-link pull-right">Change password</a> 
+          @endif
+        @endif
           <br>
           <br>
         </div>
@@ -26,7 +30,7 @@
 
             @if (count($topics) == null)
                 <ul class="list-group"> 
-                  <a href="#" class="list-group-item" style="padding:10px 1px">
+                  <a href="#" class="list-group-item">
                     Have no post
                   </a>
                 </ul>

@@ -17,13 +17,13 @@
                       @foreach($threads as $thread)
                       <?php $class = $thread->isUnread($currentUserId) ? 'alert-info alert-important' : 'alert-important'; ?>
                       <div class="media alert {!!$class!!}">
-                          <h4 class="media-heading"><a href="{{ route('profile.message.show', [$profileId, $thread->id]) }}">{!! $thread->subject !!}</a></h4>
+                          <h4 class="media-heading"><a href="{{ route('profile.message.show', [$currentUserId, $thread->id]) }}">{!! $thread->subject !!}</a></h4>
                           <p>{!! $thread->latestMessage->body !!}</p>
                           <p><small><strong>From:</strong> {!! $thread->creator()->name !!}</small></p>
                       </div>
                       @endforeach
                   @else
-                      <p>Sorry, no threads.</p>
+                      <p>Sorry, no Messages.</p>
                   @endif
                 </div>
             </div>

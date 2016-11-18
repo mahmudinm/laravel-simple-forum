@@ -13,7 +13,7 @@
                 <div class="panel-heading">Create new topic</div>
 
                 <div class="panel-body">
-                    {!! Form::model($topic, ['route' => ['threads.update', $topic->slug], 'method' => 'patch'])!!}
+                    {!! Form::model($topic, ['route' => ['topics.update', $topic->slug], 'method' => 'patch'])!!}
                           <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                               {!! Form::label('title', 'Title') !!}
                               {!! Form::text('title', null, ['class' => 'form-control']) !!}

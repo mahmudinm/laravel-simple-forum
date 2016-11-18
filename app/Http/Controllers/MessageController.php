@@ -14,29 +14,24 @@ use Session;
 
 class MessageController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    public function index($profileId)
+    public function index()
     {
         $currentUserId = Auth::user()->id;
 
         // All threads, ignore deleted/archived participants
-        $threads = Thread::getAllLatest()->get();
+        // $threads = Thread::getAllLatest()->get();
 
         // All threads that user is participating in
-        // $threads = Thread::forUser($currentUserId)->latest('updated_at')->get();
+        $threads = Thread::forUser($currentUserId)->latest('updated_at')->get();
 
         // All threads that user is participating in, with new messages
 
-        return view('message.index', compact('profileId', 'threads', 'currentUserId'));
+        return view('message.index', compact('threads', 'currentUserId'));
     }
 
     public function show($profileId, $id)
@@ -44,7 +39,7 @@ class MessageController extends Controller
         try {
             $thread = Thread::findOrFail($id);
         } catch (ModelNotFoundException $e) {
-            Session::flash('error_message', 'The thread with ID: ' . $id . ' was not found.');
+            flash('error_message', 'The thread with ID: ' . $id . ' was not found.');
             return redirect()->route('profile.show', $profileId);
         }
 
@@ -61,7 +56,7 @@ class MessageController extends Controller
           $thread->markAsRead($userId);
           return view('message.show', compact('profileId','thread', 'users'));        
         } else {
-          return redirect('/home');
+          return redirect('/');
         }
     }
 
