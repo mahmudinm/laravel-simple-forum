@@ -79,7 +79,11 @@ class TopicsController extends Controller
     public function edit($slug)
     {
         $topic = Topic::findBySlug($slug);
-        return view('topics.edit', compact('topic'));
+        if ($topic->user->id == Auth::id()) {
+          return view('topics.edit', compact('topic'));
+        }
+
+        return redirect()->back();
     }
 
     /**
@@ -92,6 +96,10 @@ class TopicsController extends Controller
     public function update(Request $request, $slug)
     {
         $topic = Topic::findBySlug($slug);
+        if (!$topic->user->id == Auth::id()) {
+          return redirect()->back();
+        }
+
         $this->validate($request, [
           'title' => 'required|max:50',
           'body' => 'required|max:10000',

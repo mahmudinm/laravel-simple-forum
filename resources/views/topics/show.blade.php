@@ -55,7 +55,7 @@
             <div class="panel-heading" style="padding-bottom:15px;">
               <img src="http://i.kaskus.id/e3.1/images/banner-kasads-new.png"  style="width:90px;height:70px;" class="pull-left img-rounded">  
               <div class="topic-panel">                
-                @if(Auth::check() && Auth::user()->id == $topic->user->id)
+                @if(Auth::check() && Auth::user()->id == $comment->user_id)
                   <a href="{{ route('topics.comments.edit', [$topic->slug, $comment->id, 'page' => $comments->currentPage()]) }}" class="btn btn-default pull-right" style="padding:3px 10px;">Edit Comment</a>
                 @endif
                 <h5>&nbsp;&nbsp;&nbsp;<a href="#" style="color:#777;" >{{ ucwords($comment->user->name) }}</a></h5>

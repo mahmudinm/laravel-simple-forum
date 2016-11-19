@@ -60,10 +60,13 @@ class CommentsController extends Controller
      */
     public function edit($topicSLug, $id)
     {
-        // return request('page');
         $topic  = Topic::findBySlug($topicSLug);
         $comment = Comment::find($id);
-        return view('comments.edit', compact('topic', 'comment'));
+        if ($comment->user_id == Auth::id()) {
+          return view('comments.edit', compact('topic', 'comment'));
+        }
+        return redirect()->back();
+
     }
 
     /**
@@ -75,12 +78,16 @@ class CommentsController extends Controller
      */
     public function update(Request $request, $topicSlug, $id)
     {
+        $topic  = Topic::findBySlug($topicSlug);
+        $comment = Comment::find($id);
+        if (!$comment->user_id == Auth::id()) {
+          return redirect()->back();
+        }
+
         $this->validate($request, [
           'body' => 'required'
         ]);
 
-        $topic  = Topic::findBySlug($topicSlug);
-        $comment = Comment::find($id);
         $comment->update($request->all());
 
         flash("Success update comment");
