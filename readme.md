@@ -4,4 +4,5 @@
 - php artisan key:generate
 - Add your recaptcha key on .env
 
-- For Admin change value admin on table user to 1 
+- php artisan migrate --seed
+- add your forum and categories on Admin/dashboard on your url

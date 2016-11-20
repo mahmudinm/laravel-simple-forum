@@ -16,29 +16,33 @@
                 </div>
 
                 <div class="panel-body">
-                  <table class="table table-hover">
-                    <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>Forum</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      @foreach ($categories as $category)
+                  @if (count($categories) == null)
+                     Have no category
+                  @else
+                    <table class="table table-hover">
+                      <thead>
                         <tr>
-                          <td>{{ $category->name }}</td>
-                          <td>{{ $category->forum->name }}</td>
-                          <td>
-                            {!! Form::model($category, ['route' => ['admin.categories.destroy', $category], 'method' => 'delete', 'class' => 'form-inline'] ) !!}
-                             <a href="{{ route('admin.categories.edit', $category->id)}}" class="btn btn-sm btn-info">Edit</a> |
-                              {!! Form::submit('Delete', ['class'=>'btn btn-sm btn-danger']) !!}
-                            {!! Form::close()!!}
-                          </td>
+                          <th>Name</th>
+                          <th>Forum</th>
+                          <th>Action</th>
                         </tr>
-                      @endforeach
-                    </tbody>
-                  </table>
+                      </thead>
+                      <tbody>
+                        @foreach ($categories as $category)
+                          <tr>
+                            <td>{{ $category->name }}</td>
+                            <td>{{ $category->forum->name }}</td>
+                            <td>
+                              {!! Form::model($category, ['route' => ['admin.categories.destroy', $category], 'method' => 'delete', 'class' => 'form-inline'] ) !!}
+                               <a href="{{ route('admin.categories.edit', $category->id)}}" class="btn btn-sm btn-info">Edit</a> |
+                                {!! Form::submit('Delete', ['class'=>'btn btn-sm btn-danger']) !!}
+                              {!! Form::close()!!}
+                            </td>
+                          </tr>
+                        @endforeach
+                      </tbody>
+                    </table>
+                  @endif
                 </div>
             </div>
         </div>
