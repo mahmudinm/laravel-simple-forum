@@ -30,7 +30,7 @@
 
             @if (count($topics) == null)
                 <ul class="list-group"> 
-                  <a href="#" class="list-group-item" style="padding:10px 1px">
+                  <a href="#" class="list-group-item">
                     Have no post
                   </a>
                 </ul>
