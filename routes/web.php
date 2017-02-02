@@ -63,7 +63,7 @@ Auth::routes();
 Route::get('/profile/password', 'ProfileController@editPassword')->name('profile.edit_password');
 Route::post('/profile/password', 'ProfileController@updatePassword')->name('profile.update_password');
 Route::get('/profile/edit', 'ProfileController@edit')->name('profile.edit');
-Route::post('/profile/update', 'ProfileController@edit')->name('profile.update');
+Route::patch('/profile/update', 'ProfileController@update')->name('profile.update');
 
 /**
  * Message pages

@@ -46,9 +46,9 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $user = User::findOrFail($id);
+        $user = User::findOrFail($request->id);
         $this->validate($request, [
           'name' => 'required',
           'photo' => 'mimes:jpg,png,jpeg|max:10240'

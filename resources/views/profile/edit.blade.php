@@ -12,8 +12,9 @@
                 <div class="panel-heading">Update Profile</div>
 
                 <div class="panel-body">
-                {!! Form::model($user, ['route' => ['profile.update', $user], 'method' => 'patch', 'files'  => true])!!}
-
+                {!! Form::model($user, ['route' => ['profile.update'], 'method' => 'patch', 'files'  => true])!!}
+                          
+                          <input type="hidden" name="id" value="{{ $user->id }}">
                           {{-- Jasny bootstrap file input --}}
                           <div class="fileinput fileinput-new" data-provides="fileinput">
                             <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
